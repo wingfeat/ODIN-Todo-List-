@@ -14,11 +14,6 @@ export default {
   devServer: {
     watchFiles: ["./src/template.html"],
   },
-  scripts: {
-    build: "webpack",
-    dev: "webpack serve",
-    deploy: "git subtree push --prefix dist origin gh-pages",
-  },
   plugins: [
     new HtmlWebpackPlugin({
       template: "./src/template.html",
