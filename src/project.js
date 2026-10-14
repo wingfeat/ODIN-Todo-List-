@@ -9,7 +9,6 @@ export class Project {
   }
   removeTodo(id) {
     const position = this.todos.findIndex((todo) => todo.id === id);
-    console.log(position);
     if (position !== -1) {
       this.todos.splice(position, 1);
     }
