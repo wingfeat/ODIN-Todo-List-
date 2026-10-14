@@ -5,17 +5,24 @@
   font-family: system-ui;
 }
 
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 main {
   background: #e6e6e6;
+  width: 100%;
 
   .container {
     min-height: 100vh;
-    width: 700px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 16px;
 
     .title {
       margin-bottom: 24px;
@@ -28,7 +35,7 @@ main {
       grid-template-rows: auto;
       gap: 8px;
 
-      div {
+      .card {
         position: relative;
         background: #e6e6e6;
         padding: 16px;
@@ -37,7 +44,7 @@ main {
         cursor: pointer;
       }
 
-      div:before {
+      .card:after {
         position: absolute;
         content: ">";
         font-weight: 900;
@@ -48,14 +55,130 @@ main {
         height: 20px;
         cursor: pointer;
       }
+    }
 
-      .categorie-container {
-        border: none;
-        display: grid;
-        grid-template-rows: auto;
-        gap: 8px;
-        padding: 0;
-      }
+    .tasksNumber {
+      margin-right: 16px;
+      background-color: #9e509e;
+      color: #e6e6e6;
+      padding: 4px 16px;
+      border-radius: 8px;
+      font-size: 0.8rem;
     }
   }
+}
+
+dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: none;
+  border-radius: 12px;
+  padding: 24px;
+  width: 90%;
+  max-width: 350px;
+  background-color: white;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Fond grisé automatique */
+dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Mise en forme du formulaire */
+.modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.modal-form h2 {
+  margin: 0 0 4px 0;
+  font-size: 20px;
+  color: #1f2937;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-size: 13px;
+  font-weight: bold;
+  color: #374151;
+}
+
+.modal-form input,
+.modal-form textarea,
+.modal-form select {
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  outline: none;
+  font-family: inherit;
+}
+
+.modal-form input:focus,
+.modal-form textarea:focus,
+.modal-form select:focus {
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+.modal-form textarea {
+  resize: vertical;
+  height: 80px;
+}
+
+.modal-form button[type="submit"] {
+  background-color: #4f46e5;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 6px;
+}
+
+.modal-form button[type="submit"]:hover {
+  background-color: #4338ca;
+}
+
+.btn-homepage {
+  width: 80%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+
+  button {
+    padding: 8px 32px;
+    border-radius: 8px;
+    background-color: #a520a5;
+    color: #e6e6e6;
+    border: none;
+    cursor: pointer;
+  }
+  button:hover {
+    background-color: #681568;
+    transition: 0.2s ease-in-out;
+  }
+}
+
+.taskCard {
+  position: relative;
+  background: #e6e6e6;
+  padding: 16px;
+  border: 2px solid #a520a5;
+  border-radius: 8px;
+}
+
+.hidden {
+  display: none;
 }

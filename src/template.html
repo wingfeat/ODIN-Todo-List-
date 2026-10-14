@@ -14,7 +14,63 @@
                 <h1></h1>
             </div>
             <div class="content">
+            </div>
+            <div class="btn-homepage">
+                <button class="open-btn" id="btnAddTodo" commandfor="todo-dialog" command="show-modal">Add a
+                    task</button>
+                <dialog id="todo-dialog">
+                    <form id="todoForm" class="modal-form">
+                        <h2>New task</h2>
+                        <div class="form-group">
+                            <label for="todoTitle">Titre</label>
+                            <input type="text" id="todoTitle" placeholder="Ex: Faire les courses..." required>
+                        </div>
+                        <div class="form-group">
+                            <label for="todoProject">Projet</label>
+                            <select id="todoProject">
+                                <option value="0">All my tasks</option>
+                            </select>
+                        </div>
 
+                        <!-- Description -->
+                        <div class="form-group">
+                            <label for="todoDescription">Description</label>
+                            <textarea id="todoDescription" placeholder="Détails de la tâche..."></textarea>
+                        </div>
+
+                        <!-- Category -->
+                        <div class="form-group">
+                            <label for="todoCategory">Catégorie</label>
+                            <input type="text" id="todoCategory" placeholder="Ex: Travail, Perso...">
+                        </div>
+
+                        <!-- Due Date -->
+                        <div class="form-group">
+                            <label for="todoDueDate">Date d'échéance</label>
+                            <input type="date" id="todoDueDate">
+                        </div>
+
+                        <!-- Priority -->
+                        <div class="form-group">
+                            <label for="todoPriority">Priorité</label>
+                            <select id="todoPriority">
+                                <option value="Basse">Basse</option>
+                                <option value="Moyenne" selected>Moyenne</option>
+                                <option value="Haute">Haute</option>
+                            </select>
+                        </div>
+
+                        <button type="submit">Créer la tâche</button>
+                    </form>
+                </dialog>
+                <button id="btnAddProject" commandfor="my-dialog" command="show-modal">Add a project</button>
+                <dialog id="my-dialog">
+                    <form id="addProject" method="dialog" class="modal-form">
+                        <h2>Add a new project!</h2>
+                        <input id="projectInput" type="text" placeholder="Enter something..." required>
+                        <button type="submit">Envoyer</button>
+                    </form>
+                </dialog>
             </div>
         </div>
     </main>

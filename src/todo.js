@@ -1,11 +1,13 @@
 export class Todo {
-  constructor(title, description, categorie, dueDate, priority) {
-    this.id = randomUUID();
+  constructor(title, description, dueDate, priority) {
     this.title = title;
     this.description = description;
-    this.categorie = categorie;
     this.dueDate = dueDate;
     this.priority = priority;
     this.completed = false;
+    this.id = crypto.randomUUID();
+  }
+  toggleComplete() {
+    this.completed = !this.completed;
   }
 }
