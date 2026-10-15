@@ -26,6 +26,7 @@ main {
 
     .title {
       margin-bottom: 24px;
+      text-align: center;
     }
 
     .content {
