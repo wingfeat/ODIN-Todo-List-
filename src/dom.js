@@ -1,4 +1,4 @@
-import { getProjects, addProject } from "./app";
+import { getProjects, addProject, addTodo } from "./app";
 
 let currentProjectId = null;
 const content = document.querySelector(".content");
@@ -38,6 +38,47 @@ export function setupProjectForm() {
     const projectInput = document.getElementById("projectInput");
 
     addProject(projectInput.value);
+    renderProjectOptions();
+    renderProjects();
+
+    form.reset();
+    dialog.close();
+  });
+}
+
+export function renderProjectOptions() {
+  const select = document.getElementById("todoProject");
+
+  select.replaceChildren();
+  const projects = getProjects();
+
+  for (const project of projects) {
+    const option = document.createElement("option");
+
+    option.textContent = project.name;
+    option.value = project.id;
+
+    select.appendChild(option);
+  }
+}
+
+export function setupTodoForm() {
+  const form = document.getElementById("todoForm");
+
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const title = document.getElementById("todoTitle").value;
+    const description = document.getElementById("todoDescription").value;
+    const dueDate = document.getElementById("todoDueDate").value;
+    const priority = document.getElementById("todoPriority").value;
+    const dialog = document.getElementById("todo-dialog");
+
+    const projectId = document.getElementById("todoProject").value;
+
+    console.log(option);
+
+    addTodo(projectId, description, dueDate, priority);
+
     renderProjects();
 
     form.reset();
