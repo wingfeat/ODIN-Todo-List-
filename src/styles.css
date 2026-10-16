@@ -172,12 +172,50 @@ dialog::backdrop {
   }
 }
 
+.btnTitle {
+  border: none;
+  background-color: transparent;
+  font-size: 1.4rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
 .taskCard {
-  position: relative;
-  background: #e6e6e6;
-  padding: 16px;
-  border: 2px solid #a520a5;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px;
+  background: white;
   border-radius: 8px;
+  border-left: 6px solid #a520a5;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.taskTitle {
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.taskDate {
+  font-size: 0.8rem;
+  color: #6b7280;
+  white-space: nowrap;
+}
+
+.taskCard.low {
+  border-left-color: #22c55e;
+}
+
+.taskCard.medium {
+  border-left-color: #f59e0b;
+}
+
+.taskCard.high {
+  border-left-color: #ef4444;
 }
 
 .hidden {
