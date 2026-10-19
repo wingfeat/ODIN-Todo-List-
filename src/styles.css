@@ -206,15 +206,15 @@ dialog::backdrop {
   white-space: nowrap;
 }
 
-.taskCard.low {
+.low {
   border-left-color: #22c55e;
 }
 
-.taskCard.medium {
+.medium {
   border-left-color: #f59e0b;
 }
 
-.taskCard.high {
+.high {
   border-left-color: #ef4444;
 }
 

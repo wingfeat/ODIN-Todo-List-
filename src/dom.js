@@ -127,9 +127,22 @@ export function renderTodos(projectId) {
     return;
   }
 
-  for (const todo of project.todos) {
+  const sortedTodos = [...project.todos];
+
+  const priorityOrder = {
+    low: 1,
+    medium: 2,
+    high: 3,
+  };
+
+  sortedTodos.sort(
+    (a, b) => priorityOrder[b.priority] - priorityOrder[a.priority],
+  );
+
+  for (const todo of sortedTodos) {
     const taskCard = document.createElement("div");
     taskCard.classList.add("taskCard");
+    taskCard.classList.add(todo.priority);
     taskCard.textContent = todo.title;
     taskCard.dataset.id = todo.id;
 
