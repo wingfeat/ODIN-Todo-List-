@@ -1,8 +1,15 @@
-import { getProjects, addProject, addTodo, getProject } from "./app";
+import {
+  getProjects,
+  addProject,
+  addTodo,
+  getProject,
+  deleteTodo,
+} from "./app";
 
 let currentProjectId = null;
 const content = document.querySelector(".content");
 const titleContainer = document.querySelector(".title");
+const btnAddProject = document.getElementById("btnAddProject");
 
 export function renderProjects() {
   content.replaceChildren();
@@ -12,6 +19,8 @@ export function renderProjects() {
   titleContainer.appendChild(h1);
 
   content.appendChild(titleContainer);
+
+  btnAddProject.classList.remove("hidden");
 
   const projects = getProjects();
 
@@ -83,7 +92,7 @@ export function setupTodoForm() {
 
     addTodo(projectId, title, description, dueDate, priority);
 
-    renderProjects();
+    render();
 
     form.reset();
     dialog.close();
@@ -93,10 +102,8 @@ export function setupTodoForm() {
 export function renderTodos(projectId) {
   content.replaceChildren();
   titleContainer.replaceChildren();
-  console.log(currentProjectId);
 
-  const project = getProject(currentProjectId);
-  console.log(project.todos);
+  const project = getProject(projectId);
 
   const titleTodos = document.createElement("button");
   titleTodos.classList.add("btnTitle");
@@ -109,12 +116,14 @@ export function renderTodos(projectId) {
     render();
   });
 
-  const taskCard = document.createElement("div");
-  taskCard.classList.add("taskCard");
+  btnAddProject.classList.add("hidden");
+
+  const taskCardNothing = document.createElement("div");
+  taskCardNothing.classList.add("taskCard");
 
   if (project.todos.length === 0) {
-    taskCard.textContent = "Nothing here!";
-    content.appendChild(taskCard);
+    taskCardNothing.textContent = "Nothing here!";
+    content.appendChild(taskCardNothing);
     return;
   }
 
@@ -123,7 +132,18 @@ export function renderTodos(projectId) {
     taskCard.classList.add("taskCard");
     taskCard.textContent = todo.title;
     taskCard.dataset.id = todo.id;
+
+    const btnDelete = document.createElement("button");
+    btnDelete.classList.add("btnDelete");
+    btnDelete.textContent = "X";
+    btnDelete.setAttribute("aria-label", "Supprimer la tâche");
+    taskCard.appendChild(btnDelete);
     content.appendChild(taskCard);
+
+    btnDelete.addEventListener("click", () => {
+      deleteTodo(projectId, todo.id);
+      render();
+    });
   }
 }
 

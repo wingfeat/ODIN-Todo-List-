@@ -221,3 +221,21 @@ dialog::backdrop {
 .hidden {
   display: none;
 }
+
+.btnDelete {
+  background-color: #e74c3c;
+  color: #ffffff;
+  border: none;
+  padding: 4px 8px;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition:
+    background-color 0.3s ease,
+    transform 0.1s ease;
+}
+
+/* Effet au survol (Hover) */
+.btnDelete:hover {
+  background-color: #c0392b;
+}
