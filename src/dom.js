@@ -7,6 +7,7 @@ import {
 } from "./app";
 
 let currentProjectId = null;
+let currentTodoId = null;
 const content = document.querySelector(".content");
 const titleContainer = document.querySelector(".title");
 const btnAddProject = document.getElementById("btnAddProject");
@@ -157,7 +158,30 @@ export function renderTodos(projectId) {
       deleteTodo(projectId, todo.id);
       render();
     });
+
+    taskCard.addEventListener("click", () => {
+      openTodoDetails(todo);
+    });
   }
+}
+
+export function openTodoDetails(todo) {
+  const dialog = document.getElementById("details-dialog");
+  dialog.showModal();
+
+  document.getElementById("detailsTitle").value = todo.title;
+  document.getElementById("detailsDescription").value = todo.description;
+  document.getElementById("detailsDueDate").value = todo.dueDate;
+  document.getElementById("detailsPriority").value = todo.priority;
+}
+
+export function setupTodoDetails() {
+  const fieldset = document.getElementById("detailsFieldset");
+  const editBtn = document.getElementById("btnEditTodo");
+
+  editBtn.addEventListener("click", () => {
+    fieldset.disabled = false;
+  });
 }
 
 export function render() {
