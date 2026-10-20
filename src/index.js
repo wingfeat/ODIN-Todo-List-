@@ -6,6 +6,7 @@ import {
   setupTodoForm,
   renderProjectOptions,
   render,
+  setupTodoDetails,
 } from "./dom.js";
 
 window.app = app;
@@ -13,4 +14,5 @@ window.app = app;
 setupProjectForm();
 renderProjectOptions();
 setupTodoForm();
+setupTodoDetails();
 render();

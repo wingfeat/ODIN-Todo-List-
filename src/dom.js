@@ -4,6 +4,7 @@ import {
   addTodo,
   getProject,
   deleteTodo,
+  editTodo,
 } from "./app";
 
 let currentProjectId = null;
@@ -154,12 +155,14 @@ export function renderTodos(projectId) {
     taskCard.appendChild(btnDelete);
     content.appendChild(taskCard);
 
-    btnDelete.addEventListener("click", () => {
+    btnDelete.addEventListener("click", (event) => {
+      event.stopPropagation();
       deleteTodo(projectId, todo.id);
       render();
     });
 
     taskCard.addEventListener("click", () => {
+      currentTodoId = todo.id;
       openTodoDetails(todo);
     });
   }
@@ -169,6 +172,8 @@ export function openTodoDetails(todo) {
   const dialog = document.getElementById("details-dialog");
   dialog.showModal();
 
+  document.getElementById("detailsFieldset").disabled = true;
+
   document.getElementById("detailsTitle").value = todo.title;
   document.getElementById("detailsDescription").value = todo.description;
   document.getElementById("detailsDueDate").value = todo.dueDate;
@@ -176,11 +181,35 @@ export function openTodoDetails(todo) {
 }
 
 export function setupTodoDetails() {
-  const fieldset = document.getElementById("detailsFieldset");
   const editBtn = document.getElementById("btnEditTodo");
 
   editBtn.addEventListener("click", () => {
-    fieldset.disabled = false;
+    document.getElementById("detailsFieldset").disabled = false;
+  });
+
+  const form = document.getElementById("detailsForm");
+
+  form.addEventListener("submit", (event) => {
+    const dialog = document.getElementById("details-dialog");
+    event.preventDefault();
+
+    const newTitle = document.getElementById("detailsTitle").value;
+    const newDescription = document.getElementById("detailsDescription").value;
+    const newDueDate = document.getElementById("detailsDueDate").value;
+    const newPriority = document.getElementById("detailsPriority").value;
+
+    editTodo(
+      currentProjectId,
+      currentTodoId,
+      newTitle,
+      newDescription,
+      newDueDate,
+      newPriority,
+    );
+
+    render();
+
+    dialog.close();
   });
 }
 
