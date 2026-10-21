@@ -7,6 +7,7 @@ import {
   getProject,
   deleteTodo,
   editTodo,
+  toggleTodo,
 } from "./app";
 
 let currentProjectId = null;
@@ -139,19 +140,40 @@ export function renderTodos(projectId) {
     high: 3,
   };
 
-  sortedTodos.sort(
-    (a, b) => priorityOrder[b.priority] - priorityOrder[a.priority],
-  );
+  sortedTodos.sort((a, b) => {
+    if (a.completed !== b.completed) {
+      return a.completed ? 1 : -1;
+    } else {
+      return priorityOrder[b.priority] - priorityOrder[a.priority];
+    }
+  });
 
   for (const todo of sortedTodos) {
     const taskCard = document.createElement("div");
-    taskCard.classList.add("taskCard");
+    const spanToggleTodo = document.createElement("span");
+    spanToggleTodo.classList.add("toggle");
     taskCard.classList.add(todo.priority);
+    taskCard.classList.add("taskCard");
     taskCard.dataset.id = todo.id;
     const taskCardTitle = document.createElement("span");
     taskCardTitle.classList.add("taskTitle");
     taskCardTitle.textContent = todo.title;
+    taskCard.prepend(spanToggleTodo);
     taskCard.appendChild(taskCardTitle);
+
+    if (todo.completed) {
+      spanToggleTodo.classList.add("completed");
+      taskCard.classList.add("completed");
+    } else {
+      spanToggleTodo.classList.remove("completed");
+      taskCard.classList.remove("completed");
+    }
+
+    spanToggleTodo.addEventListener("click", (event) => {
+      event.stopPropagation();
+      toggleTodo(project.id, todo.id);
+      render();
+    });
 
     if (todo.dueDate) {
       const date = parseISO(todo.dueDate);
