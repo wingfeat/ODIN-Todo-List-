@@ -75,13 +75,9 @@ export function editTodo(
   const todo = project.getTodo(todoId);
   if (!todo) return;
 
-  if (!title && !description && !dueDate && !priority) {
-    return;
-  }
-
   if (title) todo.title = title;
-  if (description) todo.description = description;
-  if (dueDate) todo.dueDate = dueDate;
+  if (description !== undefined) todo.description = description;
+  if (dueDate !== undefined) todo.dueDate = dueDate;
   if (priority) todo.priority = priority;
 
   return todo;
