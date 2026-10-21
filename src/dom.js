@@ -1,3 +1,5 @@
+import { format, parseISO } from "date-fns";
+import { fr } from "date-fns/locale";
 import {
   getProjects,
   addProject,
@@ -145,8 +147,21 @@ export function renderTodos(projectId) {
     const taskCard = document.createElement("div");
     taskCard.classList.add("taskCard");
     taskCard.classList.add(todo.priority);
-    taskCard.textContent = todo.title;
     taskCard.dataset.id = todo.id;
+    const taskCardTitle = document.createElement("span");
+    taskCardTitle.classList.add("taskTitle");
+    taskCardTitle.textContent = todo.title;
+    taskCard.appendChild(taskCardTitle);
+
+    if (todo.dueDate) {
+      const date = parseISO(todo.dueDate);
+      const textDate = format(date, "dd, MMM", { locale: fr });
+
+      const spanDate = document.createElement("span");
+      spanDate.classList.add("taskDate");
+      spanDate.textContent = textDate;
+      taskCard.appendChild(spanDate);
+    }
 
     const btnDelete = document.createElement("button");
     btnDelete.classList.add("btnDelete");

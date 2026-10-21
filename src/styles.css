@@ -196,13 +196,20 @@ dialog::backdrop {
 }
 
 .taskTitle {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
   font-weight: 600;
   color: #1f2937;
 }
 
 .taskDate {
   font-size: 0.8rem;
-  color: #6b7280;
+  font-weight: 600;
+  color: #6b21a8;
+  background-color: #f3e8ff;
+  padding: 2px 10px;
+  border-radius: 999px;
   white-space: nowrap;
 }
 
