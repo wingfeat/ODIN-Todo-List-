@@ -1,13 +1,12 @@
 {
-  "name": "odin-restaurant-page-",
+  "name": "Todo List",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack",
-    "dev": "webpack serve",
-    "deploy": "git subtree push --prefix dist origin gh-pages"
+    "build": "webpack --mode production --no-devtool",
+    "dev": "webpack serve"
   },
   "keywords": [],
   "author": "",
